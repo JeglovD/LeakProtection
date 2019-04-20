@@ -28,20 +28,49 @@
 //	}
 //};
 
+class Mode
+{
+public:
+	virtual void Loop() = 0;
+
+protected:
+	Mode() {};
+	Mode(const Mode&);
+	Mode& operator=(Mode&);
+};
+
+class ModeSafe :public Mode
+{
+public:
+	void Loop() override;
+	static Mode& Instanse() { static ModeSafe mode_safe; return mode_safe; }
+
+private:
+	ModeSafe();
+	ModeSafe(const ModeSafe&);
+	ModeSafe& operator=(ModeSafe&);
+
+	double mX, mY, mDX, mDY;
+};
+
 class View
 {
 public:
 	~View() {};
 	static View& Instanse() { static View view; return view; };
-	void Loop();
+	void Loop() { Mode().Loop(); };
 
 private:
-	View() {};
+	View();
 	View(const View&);
 	View& operator=(View&);
+
+	Mode& Mode() { return ModeSafe::Instanse(); }
 
 	Adafruit_SSD1306 mDisplay;
 	//static const int DISPLAY_ARRAY_SIZE = 5;
 	//Elements* mArray[DISPLAY_ARRAY_SIZE] = {};
+
+	friend ModeSafe;
 };
 

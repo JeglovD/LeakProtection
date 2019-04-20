@@ -13,8 +13,9 @@ C:\Users\DJ\AppData\Local\Temp\VMBuilds\LeakProtection\pro_16MHzatmega328\Releas
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs/pins_arduino.h \
  c:\program\ files\ (x86)\arduino\hardware\arduino\avr\variants\standard\pins_arduino.h \
  C:\Users\DJ\AppData\Local\Temp\VMBuilds\LeakProtection\pro_16MHzatmega328\Release\View.h \
- d:\_Arduino\libraries\Arduino_Vector-master/Vector.h \
+ d:\_Arduino\libraries\Vector\src/Vector.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
+ d:\_Arduino\libraries\Vector\src/Vector/VectorDefinitions.h \
  d:\_Arduino\libraries\Adafruit-GFX-Library/Adafruit_GFX.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Print.h \
  d:\_Arduino\libraries\Adafruit-GFX-Library/gfxfont.h \

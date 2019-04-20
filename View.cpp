@@ -47,8 +47,27 @@ void ModeSafe::Loop()
 
 View::View():
 	mDisplay(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET)
+	//,
+	//mPViewElements(new Vector<ViewElement>)
 {
 	// SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
 	// Address 0x3C for 128x32
 	while (!mDisplay.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {};
 }
+
+View::~View()
+{
+	//delete mPViewElements;
+}
+
+//void View::Clear()
+//{
+//	delete mPViewElements;
+//	mPViewElements = new Vector<ViewElement>;
+//}
+
+//View& View::operator<<(const ViewElement& view_element)
+//{
+//	mPViewElements->push_back();
+//	return *this;
+//}

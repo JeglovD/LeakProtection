@@ -29,21 +29,48 @@ void ViewElementIcon::Clear()
 	mElements.clear();
 }
 
-//Element::Element()
-//{}
-//
-//String Element::View() const
-//{
-//	//return size() ? String((*this)[0]) : "";
-//	//return String(size());
-//	return "";
-//}
+ViewElementTimer::ViewElementTimer():
+	mSecond(0), 
+	mMinute(0), 
+	mHour(0), 
+	mDay(0), 
+	mMonth(0), 
+	mYear(0),
+	mMillis(millis())
 
-//Display& Display::Instanse()
-//{
-//	static Display display = Display();
-//	return display;
-//}
+{
+	mElements.push_back("");
+}
+
+void ViewElementTimer::Loop()
+{
+	unsigned long millis_dif = millis() - mMillis;
+	mSecond += millis_dif / 1000;
+	mMillis = millis() - millis_dif % 1000;
+
+	if (mSecond > 59)
+	{
+		mMinute += 1;
+		mSecond -= 60;
+	}
+	if (mMinute > 59)
+	{
+		mHour += 1;
+		mMinute -= 60;
+	}
+	if (mHour > 23)
+	{
+		mDay += 1;
+		mHour -= 24;
+	}
+	if (mDay > 364)
+	{
+		mYear += 1;
+		mDay -= 365;
+	}
+
+	mElements[0] = mSecond;
+}
 
 ViewModeSafe::ViewModeSafe():
 	mX(0),
@@ -100,8 +127,13 @@ void View::ViewElementClear()
 	mPViewElement = nullptr;
 }
 
+const ViewElement* View::ViewElementGet() const
+{
+	return mPViewElement;
+}
+
 ViewMode& View::ViewMode()
 { 
-	//return ViewModeNormal::Instanse();
+	return ViewModeNormal::Instanse();
 	return ViewModeSafe::Instanse();
 }

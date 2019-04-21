@@ -12,7 +12,7 @@ public:
 	String View() const;
 
 protected:
-	String mElementsArray[5];
+	String mElementsArray[2];
 	Vector<String> mElements;
 };
 
@@ -22,6 +22,17 @@ public:
 	ViewElementIcon() {};
 	void Push_back(const char& c);
 	void Clear();
+};
+
+class ViewElementTimer :public ViewElement
+{
+public:
+	ViewElementTimer();
+	void Loop();
+
+private:
+	byte mSecond, mMinute, mHour, mDay, mMonth, mYear;
+	unsigned long mMillis;
 };
 
 class ViewMode
@@ -68,6 +79,7 @@ public:
 	static View& Instanse() { static View view; return view; };
 	void ViewElementSet(const ViewElement* p_view_element);
 	void ViewElementClear();
+	const ViewElement* ViewElementGet() const;
 	void Loop() { ViewMode().Loop(); };
 
 private:

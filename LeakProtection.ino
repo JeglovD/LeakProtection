@@ -1,3 +1,4 @@
+#include "Leak.h"
 #include "View.h"
 
 //#include <Vector.h>
@@ -13,7 +14,7 @@
 //private:
 //};
 
-ViewElementIcon view_element_icon;
+//ViewElementIcon view_element_icon;
 
 void setup() 
 {
@@ -26,12 +27,13 @@ void setup()
 	//c.mVector.push_back('a');
 	//Serial.println(c.mVector.size());
 
-	view_element_icon.Push_back(char(34));
-	view_element_icon.Push_back(char(35));
-	View::Instanse().ViewElementSet(&view_element_icon);
+	//view_element_icon.Push_back(char(34));
+	//view_element_icon.Push_back(char(35));
+	//View::Instanse().ViewElementSet(&view_element_icon);
 }
 
 void loop() 
 {
+	Leak::Instanse().Loop();
 	View::Instanse().Loop();
 }

@@ -117,11 +117,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fonts\FontLeakProtection.h" />
+    <ClInclude Include="Leak.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="Water.h" />
     <ClInclude Include="__vm\.LeakProtection.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Leak.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

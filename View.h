@@ -31,7 +31,7 @@ public:
 	void Loop();
 
 private:
-	byte mSecond, mMinute, mHour, mDay, mMonth, mYear;
+	byte mSecond, mMinute, mHour, mDay, mMonth;
 	unsigned long mMillis;
 };
 

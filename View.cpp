@@ -35,10 +35,10 @@ ViewElementTimer::ViewElementTimer():
 	mHour(0), 
 	mDay(0), 
 	mMonth(0), 
-	mYear(0),
 	mMillis(millis())
 
 {
+	mElements.push_back("");
 	mElements.push_back("");
 }
 
@@ -48,28 +48,58 @@ void ViewElementTimer::Loop()
 	mSecond += millis_dif / 1000;
 	mMillis = millis() - millis_dif % 1000;
 
-	if (mSecond > 59)
+	if (mSecond >= 60)
 	{
 		mMinute += 1;
 		mSecond -= 60;
 	}
-	if (mMinute > 59)
+	if (mMinute >= 60)
 	{
 		mHour += 1;
 		mMinute -= 60;
 	}
-	if (mHour > 23)
+	if (mHour >= 24)
 	{
 		mDay += 1;
 		mHour -= 24;
 	}
-	if (mDay > 364)
+	if (mDay >= 30)
 	{
-		mYear += 1;
-		mDay -= 365;
+		mMonth += 1;
+		mDay -= 30;
 	}
 
-	mElements[0] = mSecond;
+	if (mMonth)
+	{
+		mElements[0] = String(mMonth) + char(58);
+		mElements[1] = mElements[0] + char(63);
+		return;
+	}
+	if (mDay)
+	{
+		mElements[0] = String(mDay) + char(59);
+		mElements[1] = mElements[0] + char(63);
+		return;
+	}
+	if (mHour)
+	{
+		mElements[0] = String(mHour) + char(60);
+		mElements[1] = mElements[0] + char(63);
+		return;
+	}
+	if (mMinute)
+	{
+		mElements[0] = String(mMinute) + char(61);
+		mElements[1] = mElements[0] + char(63);
+		return;
+	}
+	if (mSecond)
+	{
+		mElements[0] = String(mSecond) + char(62) + char(63);
+		mElements[1] = mElements[0];
+		return;
+	}
+	mElements[0] = "";
 }
 
 ViewModeSafe::ViewModeSafe():

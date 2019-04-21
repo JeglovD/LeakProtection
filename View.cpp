@@ -6,9 +6,26 @@
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 #define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
 
+ViewElement::ViewElement()
+{
+	mElements.setStorage(mElementsArray);
+}
+
 String ViewElement::View() const
 {
-	return "123";
+	if (!mElements.size())
+		return "";
+	return mElements[(millis() / 500) % mElements.size()];
+}
+
+void ViewElementIcon::Push_back(const char& c)
+{
+	mElements.push_back(String(c));
+}
+
+void ViewElementIcon::Clear()
+{
+	mElements.clear();
 }
 
 //Element::Element()
@@ -71,12 +88,12 @@ View::View() :
 	while (!mDisplay.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {};
 }
 
-void View::Set(const ViewElement* p_view_element)
+void View::ViewElementSet(const ViewElement* p_view_element)
 {
 	mPViewElement = p_view_element;
 }
 
-void View::Clear()
+void View::ViewElementClear()
 {
 	mPViewElement = nullptr;
 }

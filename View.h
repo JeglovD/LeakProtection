@@ -11,8 +11,17 @@ public:
 	ViewElement();
 	String View() const;
 
-private:
+protected:
+	String mElementsArray[5];
 	Vector<String> mElements;
+};
+
+class ViewElementIcon :public ViewElement
+{
+public:
+	ViewElementIcon() {};
+	void Push_back(const char& c);
+	void Clear();
 };
 
 class ViewMode
@@ -57,8 +66,8 @@ class View
 public:
 	~View() {};
 	static View& Instanse() { static View view; return view; };
-	void Set(const ViewElement* p_view_element);
-	void Clear();
+	void ViewElementSet(const ViewElement* p_view_element);
+	void ViewElementClear();
 	void Loop() { ViewMode().Loop(); };
 
 private:

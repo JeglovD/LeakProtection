@@ -21,4 +21,5 @@ C:\Users\DJ\AppData\Local\Temp\VMBuilds\LeakProtection\pro_16MHzatmega328\Releas
  d:\_Arduino\libraries\Adafruit_SSD1306/Adafruit_SSD1306.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src/Wire.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Stream.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src/SPI.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src/SPI.h \
+ C:\Users\DJ\AppData\Local\Temp\VMBuilds\LeakProtection\pro_16MHzatmega328\Release\Fonts/FontLeakProtection.h

@@ -1,4 +1,5 @@
 #include "View.h"
+#include "Fonts/FontLeakProtection.h"
 #include <Wire.h>
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
@@ -71,9 +72,10 @@ void ViewModeNormal::Loop()
 	View::Instanse().mDisplay.clearDisplay();
 	if (View::Instanse().mPViewElement)
 	{
+		View::Instanse().mDisplay.setFont(&Roboto_Thin_36);
 		View::Instanse().mDisplay.setTextColor(WHITE);
 		View::Instanse().mDisplay.setTextSize(1);
-		View::Instanse().mDisplay.setCursor(0, 0);
+		View::Instanse().mDisplay.setCursor(0, 32);
 		View::Instanse().mDisplay.print(View::Instanse().mPViewElement->View());
 	}
 	View::Instanse().mDisplay.display();
@@ -100,6 +102,6 @@ void View::ViewElementClear()
 
 ViewMode& View::ViewMode()
 { 
-	return ViewModeNormal::Instanse();
+	//return ViewModeNormal::Instanse();
 	return ViewModeSafe::Instanse();
 }

@@ -26,11 +26,8 @@ void setup()
 	//c.mVector.push_back('a');
 	//Serial.println(c.mVector.size());
 
-	view_element_icon.Push_back('1');
-	view_element_icon.Push_back('2');
-	view_element_icon.Push_back('3');
-	view_element_icon.Push_back('4');
-	view_element_icon.Push_back('5');
+	view_element_icon.Push_back(char(34));
+	view_element_icon.Push_back(char(35));
 	View::Instanse().ViewElementSet(&view_element_icon);
 }
 

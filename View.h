@@ -10,10 +10,14 @@ class ViewElement
 public:
 	ViewElement();
 	String View() const;
+	void ViewElementNextSet(const ViewElement* p_view_element);
 
 protected:
 	String mElementsArray[2];
 	Vector<String> mElements;
+
+private:
+	ViewElement* mPViewElementNext;
 };
 
 class ViewElementIcon :public ViewElement
@@ -28,6 +32,7 @@ class ViewElementTimer :public ViewElement
 {
 public:
 	ViewElementTimer();
+	void Clear();
 	void Loop();
 
 private:

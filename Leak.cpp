@@ -2,15 +2,15 @@
 
 Leak::Leak()
 {
-	mViewElementIcon.Push_back(char(61));
+	mViewElementIcon.Push_back(char(65));
 }
 
 void Leak::Loop()
 {
-	//if (View::Instanse().ViewElementGet() != &mViewElementIcon)
-	//	View::Instanse().ViewElementSet(&mViewElementIcon);
-	if (View::Instanse().ViewElementGet() != &mViewElementTimer)
-		View::Instanse().ViewElementSet(&mViewElementTimer);
-
+	if (View::Instanse().ViewElementGet() != &mViewElementIcon)
+	{
+		View::Instanse().ViewElementSet(&mViewElementIcon);
+		mViewElementIcon.ViewElementNextSet(&mViewElementTimer);
+	}
 	mViewElementTimer.Loop();
 }

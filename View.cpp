@@ -7,16 +7,25 @@
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 #define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
 
-ViewElement::ViewElement()
+ViewElement::ViewElement():
+	mPViewElementNext(nullptr)
 {
 	mElements.setStorage(mElementsArray);
 }
 
 String ViewElement::View() const
 {
-	if (!mElements.size())
-		return "";
-	return mElements[(millis() / 500) % mElements.size()];
+	String result("");
+	if (mElements.size())
+		result = mElements[(millis() / 500) % mElements.size()];
+	if (mPViewElementNext)
+		result += mPViewElementNext->View();
+	return result;
+}
+
+void ViewElement::ViewElementNextSet(const ViewElement* p_view_element)
+{
+	mPViewElementNext = p_view_element;
 }
 
 void ViewElementIcon::Push_back(const char& c)
@@ -29,17 +38,21 @@ void ViewElementIcon::Clear()
 	mElements.clear();
 }
 
-ViewElementTimer::ViewElementTimer():
-	mSecond(0), 
-	mMinute(0), 
-	mHour(0), 
-	mDay(0), 
-	mMonth(0), 
-	mMillis(millis())
-
+ViewElementTimer::ViewElementTimer()
 {
+	Clear();
 	mElements.push_back("");
 	mElements.push_back("");
+}
+
+void ViewElementTimer::Clear()
+{
+	mSecond = 0;
+	mMinute = 0;
+	mHour = 0;
+	mDay = 0;
+	mMonth = 0;
+	mMillis = millis();
 }
 
 void ViewElementTimer::Loop()

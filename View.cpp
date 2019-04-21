@@ -6,6 +6,11 @@
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 #define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
 
+String ViewElement::View() const
+{
+	return "123";
+}
+
 //Element::Element()
 //{}
 //
@@ -22,15 +27,14 @@
 //	return display;
 //}
 
-ModeSafe::ModeSafe():
+ViewModeSafe::ViewModeSafe():
 	mX(0),
 	mY(0),
 	mDX(1.01),
 	mDY(1)
-{
-}
+{}
 
-void ModeSafe::Loop()
+void ViewModeSafe::Loop()
 {
 	View::Instanse().mDisplay.clearDisplay();
 	View::Instanse().mDisplay.drawPixel(mX, mY, WHITE);
@@ -45,29 +49,40 @@ void ModeSafe::Loop()
 	mY += mDY;
 }
 
-View::View():
-	mDisplay(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET)
-	//,
-	//mPViewElements(new Vector<ViewElement>)
+void ViewModeNormal::Loop()
+{
+	View::Instanse().mDisplay.clearDisplay();
+	if (View::Instanse().mPViewElement)
+	{
+		View::Instanse().mDisplay.setTextColor(WHITE);
+		View::Instanse().mDisplay.setTextSize(1);
+		View::Instanse().mDisplay.setCursor(0, 0);
+		View::Instanse().mDisplay.print(View::Instanse().mPViewElement->View());
+	}
+	View::Instanse().mDisplay.display();
+}
+
+View::View() :
+	mDisplay(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET),
+	mPViewElement(nullptr)
 {
 	// SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
 	// Address 0x3C for 128x32
 	while (!mDisplay.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {};
 }
 
-View::~View()
+void View::Set(const ViewElement* p_view_element)
 {
-	//delete mPViewElements;
+	mPViewElement = p_view_element;
 }
 
-//void View::Clear()
-//{
-//	delete mPViewElements;
-//	mPViewElements = new Vector<ViewElement>;
-//}
+void View::Clear()
+{
+	mPViewElement = nullptr;
+}
 
-//View& View::operator<<(const ViewElement& view_element)
-//{
-//	mPViewElements->push_back();
-//	return *this;
-//}
+ViewMode& View::ViewMode()
+{ 
+	return ViewModeNormal::Instanse();
+	return ViewModeSafe::Instanse();
+}
